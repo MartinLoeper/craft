@@ -17,7 +17,13 @@ RUN apt-get -y update \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
 
+# install zip ext
 RUN apt-get install -y \
         libzip-dev \
         zip \
     && docker-php-ext-install zip
+
+# install pgsql ext
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
